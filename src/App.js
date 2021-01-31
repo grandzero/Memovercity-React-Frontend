@@ -26,8 +26,8 @@ function App() {
 <Container>
   <Switch>
     <Route path="/" exact component={Homepage} />
-     <Route path="/login" component={Login} />
-      <Route path="/signup" component={SignUp} /> 
+    <Route path="/login" component={Login} />
+    <Route path="/signup" component={SignUp} /> 
      <Route path="/" exact component={WelcomePage} />
      <Route path="/ex" exact component={Excercises} />
      <Route path="/stories" exact component={PracticeList} />
