@@ -13,7 +13,7 @@ import React from "react";
 import { Container} from "react-bootstrap";
 import NavbarComponent from './components/NavbarComponent';
 import Footer from './components/Footer';
-
+import {MainProvider} from './contexts/MainContext';
 import {
   BrowserRouter as Router,
   Switch,
@@ -22,10 +22,14 @@ import {
 function App() {
   return (<>
 <Router>
+<MainProvider>
 <NavbarComponent />
 <Container>
   <Switch>
-    <Route path="/" exact component={Homepage} />
+    
+    <Route path="/" exact> 
+      <Homepage />
+    </Route>
     <Route path="/login" component={Login} />
     <Route path="/signup" component={SignUp} /> 
      <Route path="/user" exact component={WelcomePage} />
@@ -34,8 +38,10 @@ function App() {
      <Route path="/practice/:id" exact component={Practice} />
      <Route path="/story-tutorial" exact component={StoryTutorial} />
      <Route path="/mb-tutorial" exact component={MindBulletsTutorial} />
+     
   </Switch>
 </Container>
+</MainProvider>
 </Router>
 <Footer />
 </>

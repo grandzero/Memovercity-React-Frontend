@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {  useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import WelcomePage from './WelcomePage';
 import "./login-signup.css";
 import axios from "axios";
+import MainContext from '../contexts/MainContext';
 const ENDPOINT = "https://memovercity.herokuapp.com/user/login";
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -41,41 +42,39 @@ function Copyright() {
   );
 }
 
-class Login extends Component {
-    constructor(props) {
-      super(props);
-
-      this.state = {
-        email: null,
-        password: null,
-        isLoggedIn: false,
-        formErrors: {
-          email: "",
-          password: ""
-        }
-      };
-      this.buttonClicked = this.buttonClicked.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    buttonClicked(event) {
-      //Login Logic will be implemented here
-      this.handleSubmit(event);
-    }
-
-    handleSubmit = e => {
-        e.preventDefault();
+function Login(props) {
+  const [state,setState] = useState({email: null,password: null,isLoggedIn: false,
+    formErrors: {
+      email: "",
+      password: ""
+    }});
     
-        if (formValid(this.state)) {
+      
+    const {setName, setLogin} = useContext(MainContext);
+
+    const buttonClicked = (event) => {
+      //Login Logic will be implemented here
+      handleSubmit(event);
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault();
+      
+        if (formValid(state)) {
           console.log(`
             --SUBMITTING--
-            Email: ${this.state.email}
-            Password: ${this.state.password}
+            Email: ${state.email}
+            Password: ${state.password}
           `); 
           
-          axios.post(ENDPOINT,{email: this.state.email, password:this.state.password})
+          axios.post(ENDPOINT,{email: state.email, password:state.password})
           .then( (res) => {
-              if(res.status === 200) this.setState({isLoggedIn: true});
+              if(res.status === 200) {
+                setLogin(true);
+                setName(res.data.username);
+                setState({...state,isLoggedIn: true});
+              
+              }
               console.log(res.data);
           })
           .catch(e => console.log("Error is : ", e));
@@ -85,10 +84,10 @@ class Login extends Component {
           console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
         }
       };
-      handleChange = e => {
+      const handleChange = e => {
         e.preventDefault();
         const { name, value } = e.target;
-        let formErrors = { ...this.state.formErrors };
+        let formErrors = { ...state.formErrors };
     
         switch (name) {
           case "email":
@@ -104,14 +103,14 @@ class Login extends Component {
             break;
         }
     
-        this.setState({ formErrors, [name]: value });
+        setState({ ...state,formErrors, [name]: value });
       };
     
-      render() {
-        const { formErrors } = this.state;
-        const isLoggedIn = this.state.isLoggedIn;
+      
+        const { formErrors } = state;
+        const isLoggedIn = state.isLoggedIn;
         
-        if (isLoggedIn && formValid(this.state)) {
+        if (isLoggedIn && formValid(state)) {
           return <Redirect to="/user" component={WelcomePage}/>
         }
 
@@ -120,7 +119,7 @@ class Login extends Component {
             <div className="wrapper">
             <div className="form-wrapper">
               <h1>Log In</h1>
-              <form onSubmit={this.handleSubmit} noValidate>
+              <form onSubmit={handleSubmit} noValidate>
                 <div className="email">
                   <label htmlFor="email">Email</label>
                   <input
@@ -129,7 +128,7 @@ class Login extends Component {
                     type="email"
                     name="email"
                     noValidate
-                    onChange={this.handleChange}
+                    onChange={handleChange}
                   />
                   {formErrors.email.length > 0 && (
                     <span className="errorMessage">{formErrors.email}</span>
@@ -143,14 +142,14 @@ class Login extends Component {
                     type="password"
                     name="password"
                     noValidate
-                    onChange={this.handleChange}
+                    onChange={handleChange}
                   />
                   {formErrors.password.length > 0 && (
                     <span className="errorMessage">{formErrors.password}</span>
                   )}
                 </div>
                 <div className="createAccount">
-                  <button type="submit" onClick={this.buttonClicked}>
+                  <button type="submit" onClick={buttonClicked}>
                     Log In
                   </button>
                 </div>
@@ -168,7 +167,7 @@ class Login extends Component {
             </Box>
           </div>
         );
-      }
+      
     }
     
     export default Login;
