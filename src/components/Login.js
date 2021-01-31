@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import WelcomePage from './WelcomePage';
 import "./login-signup.css";
 import axios from "axios";
-const ENDPOINT = "http://memovercity.herokuapp.com/user/login";
+const ENDPOINT = "https://memovercity.herokuapp.com/user/login";
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
   ); 
