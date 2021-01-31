@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import WelcomePage from './WelcomePage';
 import "./login-signup.css";
 import axios from "axios";
-const ENDPOINT = "http://localhost:5000/user/login";
+const ENDPOINT = "http://memovercity.herokuapp.com/user/login";
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
   ); 
@@ -104,7 +104,7 @@ class Login extends Component {
             break;
         }
     
-        this.setState({ formErrors, [name]: value }, () => console.log(this.state));
+        this.setState({ formErrors, [name]: value });
       };
     
       render() {
