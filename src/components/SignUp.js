@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
 import WelcomePage from './WelcomePage';
 import "./login-signup.css";
 import axios from 'axios';
@@ -72,7 +71,7 @@ class SignUp extends Component {
     console.log("Hello");
     axios.post(ENDPOINT,{name:this.state.firstName,email: this.state.email, password:this.state.password})
     .then( (res) => {
-        if(res.status == 200) this.setState({isLoggedIn: true});
+        if(res.status === 200) this.setState({isLoggedIn: true});
         console.log("Res data is : ",res.data);
     });
 
