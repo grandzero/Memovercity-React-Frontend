@@ -27,9 +27,9 @@ function NavbarComponent() {
         </Nav>
         {isLoggedIn ? <div style={{display:"flex"}} >
         {<Link style={{margin:"auto",marginRight:7}} to="/userdashboard">{name}</Link>}
-        <img alt="avatar" src="https://style.anu.edu.au/_anu/4/images/placeholders/person.png"
+        {/*<img alt="avatar" src="https://style.anu.edu.au/_anu/4/images/placeholders/person.png"
             style={{width:35, height:35, borderRadius:45, margin:"auto", marginRight:15}}
-          ></img>
+    ></img>*/}
         
         {<Button onClick={handleLogout} style={{margin:"auto", marginRight:15, color:"white"}}>Logout</Button>}
 

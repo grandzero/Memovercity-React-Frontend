@@ -67,11 +67,11 @@ function WelcomePage() {
           sm={12}
           xs={12}
         >
-          <CardItem
+          <Link to="/learn"><CardItem
            src={Extras}
            name={exName}
            desc={exDesc}
-           />
+           /></Link>
         </Col>
       </Row>
     </>

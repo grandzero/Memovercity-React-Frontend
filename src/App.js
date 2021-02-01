@@ -15,6 +15,8 @@ import NavbarComponent from './components/NavbarComponent';
 import Footer from './components/Footer';
 import {MainProvider} from './contexts/MainContext';
 import UserDashboard from './components/UserDashboard';
+import LearnWith from './components/LearnWith';
+import LearnPage from './components/LearnWith/LearnPage';
 import {
   BrowserRouter as Router,
   Switch,
@@ -35,6 +37,8 @@ function App() {
     <Route path="/userdashboard" component={UserDashboard} /> 
      <Route path="/user" exact component={WelcomePage} />
      <Route path="/ex" exact component={Excercises} />
+     <Route path="/learn/:id" exact component={LearnPage} />
+     <Route path="/learn" exact component={LearnWith} />
      <Route path="/ex/:practiceName" exact component={PracticeList} />
      <Route path="/practice/:id" exact component={Practice} />
      <Route path="/story-tutorial" exact component={StoryTutorial} />
