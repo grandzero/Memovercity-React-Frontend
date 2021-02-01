@@ -7,7 +7,7 @@ function StoryTutorial() {
     const {token} = useContext(MainContext);
     useEffect(() => {
         if(!token) {alert("You must authenticate to access this page"); window.location.href = "/";}
-    },[])
+    },[token])
     return (token &&
         <div style={{height:"80vh"}}>
             <Row id="box" style={{textAlign:"center",justifyContent:"center",height:"45%",width:"100%",marginTop:15}} className="gradient-border">
