@@ -24,12 +24,11 @@ function App() {
 <Router>
 <MainProvider>
 <NavbarComponent />
-<Container>
+
   <Switch>
     
-    <Route path="/" exact> 
-      <Homepage />
-    </Route>
+    <Route path="/" exact component={Homepage} /> 
+    <Container>
     <Route path="/login" component={Login} />
     <Route path="/signup" component={SignUp} /> 
      <Route path="/user" exact component={WelcomePage} />
@@ -38,9 +37,9 @@ function App() {
      <Route path="/practice/:id" exact component={Practice} />
      <Route path="/story-tutorial" exact component={StoryTutorial} />
      <Route path="/mb-tutorial" exact component={MindBulletsTutorial} />
-     
+     </Container>
   </Switch>
-</Container>  
+  
 </MainProvider>
 </Router>
 <Footer />

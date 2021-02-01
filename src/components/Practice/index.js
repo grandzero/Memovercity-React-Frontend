@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom';
 import {Row, Button} from 'react-bootstrap';
 import axios from 'axios';
 import MainContext from '../../contexts/MainContext';
-//const ls = ["araba","ağaç", "kalem", "kitap", "bardak", "ayakkabı", "pano", "baykuş", "kaplumbağa" , "tabela"];
+let interv;
 function Practice() {
     const {id} = useParams();
     const [isSolving, setSolving] = useState(false);
@@ -24,19 +24,35 @@ function Practice() {
               "http-auth":token
           }
     }).then(res => setList(res.data));
-
-    /*if(id === "timed"){
-        const in = setInterval(() => {
-            
-
-        }, 1000)
-    }
-
-     return () => {
-         clearInterval(in);
-     }*/
     }, [token])
+    useEffect(() => {
+        
+        if(!interv) clearInterval(interv);
+        if(id === "timed" && time !== 0){
+             interv = setInterval(function(){ 
+                if(time!== 0){
+                    setTime(time-1);
+                } 
+    
+            
+            }, 1000);
+        }
+        if(time === 0) clearInterval(interv);
+    
+         return () => {
+             clearInterval(interv);
+         }
+    }, [id,time]);
 
+    useEffect(() => {
+        if(time === 0){
+            startHandler();
+        }
+    },[time]);
+
+    useEffect(() => {
+        !interv && clearInterval(interv);
+    }, [isSolving,isComplete]);
     const startHandler = () => {
         setSolving(true);
     }
@@ -76,7 +92,7 @@ function Practice() {
             >{isComplete ? <div>
                 <h1 style={{fontSize:55, color:"green"}}>{founded} Words Found</h1>
                 <h1 style={{fontSize:55, color:"red"}}>{failed} Words Missing</h1>
-            </div> : id === "timed" && <h1 style={{fontSize:55}}>{time}</h1>}</Row>
+            </div> : id === "timed" && !isSolving && <h1 style={{fontSize:55}}>{time}</h1>}</Row>
             <div
                style={{
                 fontFamily: "Tahoma, sans-serif",
