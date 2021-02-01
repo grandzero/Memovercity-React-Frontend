@@ -5,7 +5,7 @@ import MainContext from '../../contexts/MainContext';
 import axios from 'axios';
 const Logout = "https://memovercity.herokuapp.com/user/logout";
 function NavbarComponent() {
-  const {name, isLoggedIn,setLogin} = useContext(MainContext);
+  const {name, isLoggedIn,setLogin,token} = useContext(MainContext);
 
   const handleLogout = () => {
     console.log("Clicked");
@@ -21,9 +21,9 @@ function NavbarComponent() {
 
     return (
         <Navbar bg="dark" variant="dark">
-        <Navbar.Brand><Link style={{color:"white"}} to="/">Memovercity</Link></Navbar.Brand>
+        <Navbar.Brand><Link style={{color:"white"}} to={token ? "/user" : "/"}>Memovercity</Link></Navbar.Brand>
         <Nav className="mr-auto">
-        <NavLink to="/" activeStyle={{color:"white"}} style={{color:"white"}}>Home </NavLink>
+        <NavLink to={token ? "/user" : "/"} activeStyle={{color:"white"}} style={{color:"white"}}>Home </NavLink>
         </Nav>
         {isLoggedIn ? <div style={{display:"flex"}} >
         <p onClick={handleLogout} style={{margin:"auto", marginRight:15, color:"white"}}>{name}</p>

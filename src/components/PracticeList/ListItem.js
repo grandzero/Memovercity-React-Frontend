@@ -16,7 +16,7 @@ nested: {
 }));
 
 
-function ListItemDetails() {
+function ListItemDetails({title,desc,st,isTimed}) {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
   const handleClick = () => {
@@ -25,14 +25,14 @@ function ListItemDetails() {
 
     return (<>
         <ListItem button onClick={handleClick}>
-        <ListItemText primary="Story Techniques" />
+        <ListItemText primary={title} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-        <Link style={{ textDecoration: 'none' }} to="/practice/abc-123"><ListItem button className={classes.nested}>
-            <ListItemText primary="Starred" />
-            <Button variant="success">Start</Button>
+        <Link style={{ textDecoration: 'none' }} to={`/practice/${isTimed ? "timed" : "free"}`}><ListItem button className={classes.nested}>
+            <ListItemText primary={desc} />
+            <Button variant={st}>Start</Button>
           </ListItem></Link>
         </List>
       </Collapse>

@@ -34,13 +34,13 @@ function App() {
     <Route path="/signup" component={SignUp} /> 
      <Route path="/user" exact component={WelcomePage} />
      <Route path="/ex" exact component={Excercises} />
-     <Route path="/stories" exact component={PracticeList} />
+     <Route path="/ex/:practiceName" exact component={PracticeList} />
      <Route path="/practice/:id" exact component={Practice} />
      <Route path="/story-tutorial" exact component={StoryTutorial} />
      <Route path="/mb-tutorial" exact component={MindBulletsTutorial} />
      
   </Switch>
-</Container>
+</Container>  
 </MainProvider>
 </Router>
 <Footer />

@@ -1,9 +1,11 @@
-import React from 'react'
+import React,{useContext,useEffect} from 'react'
 import {  Col, Row } from "react-bootstrap";
 import CardItem from "../CardItem";
 import {Link} from "react-router-dom";
+import MainContext from '../../contexts/MainContext';
 const Excercises = "https://images.wallpaperscraft.com/image/tunnel_neon_brain_124149_1024x768.jpg";
 const Extras = "https://pix10.agoda.net/hotelImages/5871009/-1/cc6a9504ad5eddf5c7e54f4f97b99922.jpg?s=1024x768";
+
 
 const pName = "Excercises";
 const pDesc = "Learn And Practice Proven Memory Techniques";
@@ -11,7 +13,12 @@ const pDesc = "Learn And Practice Proven Memory Techniques";
 const exName = "Examples";
 const exDesc = "Learn And Remember New Things Using Techniques";
 function WelcomePage() {
-  return (
+  const {name,token} = useContext(MainContext);
+  useEffect(() => {
+    
+    if(!token) {alert("You must authenticate to access this page"); window.location.href = "/";}
+  },[]);
+  return (token && 
     <>
       <Row
         style={{
@@ -22,7 +29,7 @@ function WelcomePage() {
           marginTop: "10vh"
         }}
       >
-        <h1>Welcome {"Bayram"} </h1>
+        <h1>Welcome {name} </h1>
       </Row>
       <Row
       style={{

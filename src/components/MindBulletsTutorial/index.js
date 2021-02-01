@@ -1,8 +1,14 @@
-import React from 'react';
+import {useContext,useEffect} from 'react';
 import {Row} from 'react-bootstrap';
+import MainContext from '../../contexts/MainContext';
+
 const ls = ["araba","ağaç", "kalem", "kitap", "bardak", "ayakkabı", "pano", "baykuş", "kaplumbağa" , "tabela"];
 function StoryTutorial() {
-    return (
+    const {token} = useContext(MainContext);
+    useEffect(() => {
+        if(!token) {alert("You must authenticate to access this page"); window.location.href = "/";}
+    },[])
+    return (token &&
         <div style={{height:"80vh"}}>
             <Row id="box" style={{textAlign:"center",justifyContent:"center",height:"45%",width:"100%",marginTop:15}} className="gradient-border">
                 <div  style={{textAlign:"center",justifyContent:"center",height:"100%",width:"100%",overflow:"auto"}} >

@@ -13,15 +13,17 @@ export const MainProvider = ({children}) => {
     
     const [name,setName] = useState("");
     const [isLoggedIn, setLogin] = useState(false);
+    const [token,setToken] = useState("");
 
 
     const values = {
         name,
         setName,
         isLoggedIn,
-        setLogin
+        setLogin,
+        token,
+        setToken
     }
-
 
 
 

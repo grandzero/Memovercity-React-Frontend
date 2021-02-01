@@ -57,7 +57,7 @@ function SignUp(props) {
     }
   });
 
-  const {setLogin,setName} = useContext(MainContext);
+  const {setLogin,setName,setToken} = useContext(MainContext);
     
 
 
@@ -69,6 +69,7 @@ function SignUp(props) {
     axios.post(ENDPOINT,{name:state.firstName,email: state.email, password:state.password})
     .then( (res) => {
         if(res.status === 200) {
+          setToken(res.data.aTo);
           setLogin(true);
           setName(res.data.username);
           setState({...state,isLoggedIn: true});

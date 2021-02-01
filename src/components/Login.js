@@ -50,7 +50,7 @@ function Login(props) {
     }});
     
       
-    const {setName, setLogin} = useContext(MainContext);
+    const {setName, setLogin, setToken} = useContext(MainContext);
 
     const buttonClicked = (event) => {
       //Login Logic will be implemented here
@@ -70,6 +70,7 @@ function Login(props) {
           axios.post(ENDPOINT,{email: state.email, password:state.password})
           .then( (res) => {
               if(res.status === 200) {
+                setToken(res.data.aTo);
                 setLogin(true);
                 setName(res.data.username);
                 setState({...state,isLoggedIn: true});

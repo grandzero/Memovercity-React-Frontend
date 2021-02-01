@@ -1,12 +1,31 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect,useContext} from 'react';
 import {useParams} from 'react-router-dom';
 import {Row, Button} from 'react-bootstrap';
-const ls = ["araba","ağaç", "kalem", "kitap", "bardak", "ayakkabı", "pano", "baykuş", "kaplumbağa" , "tabela"];
+import axios from 'axios';
+import MainContext from '../../contexts/MainContext';
+//const ls = ["araba","ağaç", "kalem", "kitap", "bardak", "ayakkabı", "pano", "baykuş", "kaplumbağa" , "tabela"];
 function Practice() {
     const {id} = useParams();
     const [isSolving, setSolving] = useState(false);
     const [isComplete, setComplete] = useState(false);
+    const [time, setTime] = useState(100);
+    const [founded, setFound] = useState(0);
+    const [failed, setFail] = useState(0);
+    const [ls,setList] = useState([]);
     const [inputs, setInputs] = useState(["","","","","","","","","",""]);
+    const endpoint = "https://memovercity.herokuapp.com/ex/getwords";
+    const saveEndpoint = "https://memovercity.herokuapp.com/ex/save"
+    const {token} = useContext(MainContext);
+    useEffect(() => {
+      if(!token) {alert("You must authenticate to access this page"); window.location.href = "/";}
+
+      axios.get(endpoint, {
+          headers: {
+              "http-auth":token
+          }
+    }).then(res => setList(res.data));
+    }, [token])
+
     const startHandler = () => {
         setSolving(true);
     }
@@ -16,8 +35,24 @@ function Practice() {
     const completeHandler = () => {
         setComplete(true);
         setSolving(false);
+        let founded = 0;
+        let failed = 0;
+        ls.map((item,key) => {item === inputs[key] ? ++founded : ++failed ; return true});
+        setFound(founded);
+        setFail(failed);
+        axios.post(saveEndpoint, {
+            type:id,
+            found:founded,
+            fail: failed
+        })
+
     }
-    return (
+
+    useEffect(() => {
+
+
+    }, [])
+    return (token &&
         <div style={{textAlign: "center",justifyContent: "center"}} >
             <Row
                style={{
@@ -27,7 +62,10 @@ function Practice() {
                 marginBottom:"5vh",
                 marginTop: "3vh"
              }}
-            ><h1 style={{fontSize:55}}>{id} : 00:00</h1></Row>
+            >{isComplete ? <div>
+                <h1 style={{fontSize:55, color:"green"}}>{founded} Words Found</h1>
+                <h1 style={{fontSize:55, color:"red"}}>{failed} Words Missing</h1>
+            </div> : id === "timed" && <h1 style={{fontSize:55}}>{time}</h1>}</Row>
             <div
                style={{
                 fontFamily: "Tahoma, sans-serif",
