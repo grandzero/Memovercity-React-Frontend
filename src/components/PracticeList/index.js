@@ -40,7 +40,7 @@ export default function NestedList() {
       setTutPage("/mb-tutorial");
     }
 
-    axios.get(EndPoint, {
+    axios.get(endp, {
       headers: {
         'http-auth' : token
       }
