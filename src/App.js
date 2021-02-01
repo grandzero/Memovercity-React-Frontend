@@ -14,6 +14,7 @@ import { Container} from "react-bootstrap";
 import NavbarComponent from './components/NavbarComponent';
 import Footer from './components/Footer';
 import {MainProvider} from './contexts/MainContext';
+import UserDashboard from './components/UserDashboard';
 import {
   BrowserRouter as Router,
   Switch,
@@ -31,6 +32,7 @@ function App() {
     <Container>
     <Route path="/login" component={Login} />
     <Route path="/signup" component={SignUp} /> 
+    <Route path="/userdashboard" component={UserDashboard} /> 
      <Route path="/user" exact component={WelcomePage} />
      <Route path="/ex" exact component={Excercises} />
      <Route path="/ex/:practiceName" exact component={PracticeList} />
