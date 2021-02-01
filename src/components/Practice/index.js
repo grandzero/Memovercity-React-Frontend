@@ -24,6 +24,17 @@ function Practice() {
               "http-auth":token
           }
     }).then(res => setList(res.data));
+
+    /*if(id === "timed"){
+        const in = setInterval(() => {
+            
+
+        }, 1000)
+    }
+
+     return () => {
+         clearInterval(in);
+     }*/
     }, [token])
 
     const startHandler = () => {

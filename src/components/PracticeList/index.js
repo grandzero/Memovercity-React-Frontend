@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(4),
   },
 }));
+const EndPoint = "https://memovercity.herokuapp.com/ex/";
 export default function NestedList() {
   const {token} = useContext(MainContext);
   const classes = useStyles();
@@ -26,15 +27,15 @@ export default function NestedList() {
   const [data,setData] = useState([]);
   const [title,setTitle] = useState("");
   const [tutorialPage, setTutPage] = useState("");
-  let EndPoint;
+  const [endp,setEndp] = useState(EndPoint);
   useEffect(() => {
     if(!token) {alert("You must authenticate to access this page"); window.location.href = "/";}
     if(practiceName === "st"){
-      EndPoint = "https://memovercity.herokuapp.com/ex/storylist";
+      setEndp(EndPoint+"storylist")
       setTitle("Story Exercises");
       setTutPage("/story-tutorial");
     }else if(practiceName === "mb"){
-      EndPoint = "https://memovercity.herokuapp.com/ex/mindBulletList";
+      setEndp(EndPoint+"mindBulletList");
       setTitle("Mind Bullets Exercises");
       setTutPage("/mb-tutorial");
     }
