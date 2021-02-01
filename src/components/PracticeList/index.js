@@ -49,7 +49,7 @@ export default function NestedList() {
       setData(res.data);
     })
     
-  },[]);
+  },[endp,practiceName,token]);
 
   return (token && <>
   <Row style={{marginTop:25, textAlign:"center", justifyContent:"center"}}><Link to={tutorialPage}><h1 style={{color:"black"}}>Go To Tutorial</h1></Link></Row>
