@@ -17,7 +17,7 @@ function WelcomePage() {
   useEffect(() => {
     
     if(!token) {alert("You must authenticate to access this page"); window.location.href = "/";}
-  },[]);
+  },[token]);
   return (token && 
     <>
       <Row
