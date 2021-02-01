@@ -17,7 +17,7 @@ function Excercises() {
     }).then(res=> setList(res.data));
 
     console.log(ls);
-  }, [token])
+  }, [token,ls])
     return (token &&
         <>
         <Row
