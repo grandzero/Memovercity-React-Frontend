@@ -18,7 +18,7 @@ function Practice() {
     const {token} = useContext(MainContext);
     useEffect(() => {
       if(!token) {alert("You must authenticate to access this page"); window.location.href = "/";}
-
+      setTime(100);
       axios.get(endpoint, {
           headers: {
               "http-auth":token
