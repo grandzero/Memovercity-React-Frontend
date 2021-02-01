@@ -4,13 +4,7 @@ import {Link} from "react-router-dom";
 import CardItem from '../CardItem';
 import MainContext from '../../contexts/MainContext';
 import axios from 'axios';
-//  const Story = "https://eskipaper.com/images/free-book-wallpaper-1.jpg";
-const Pin = "https://wallpaperaccess.com/full/1139035.jpg";
-const mb= "Mind Bullets Technique";
-//const st = "Story Technique";
 
-const mbDesc = "With this technique you will learn some mind bullets to remember. And you will remember thing using this mind bullets";
-//const stDesc = "With this technique you will learn build stories to remember things";
 function Excercises() {
     const [ls,setList] = useState([]);
   const {token} = useContext(MainContext);
