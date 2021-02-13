@@ -10,7 +10,7 @@ function Excercises() {
   const {token} = useContext(MainContext);
   useEffect(() => {
     if(!token) {alert("You must authenticate to access this page"); window.location.href = "/";}
-    axios.get("http://memovercity.herokuapp.com/learn/list", {
+    axios.get("https://memovercity.herokuapp.com/learn/list", {
         headers:{
             "http-auth":token
         }
