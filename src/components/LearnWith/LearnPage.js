@@ -3,7 +3,7 @@ import {Row} from 'react-bootstrap';
 import MainContext from '../../contexts/MainContext';
 import {useParams} from 'react-router-dom';
 import axios from 'axios';
-const Endpoint = "http://memovercity.herokuapp.com/learn/list/";
+const Endpoint = "https://memovercity.herokuapp.com/learn/list/";
 function LearnPage() {
     const {token} = useContext(MainContext);
     const {id} = useParams();
